@@ -33,15 +33,19 @@ heroku create
 git push heroku master
 ```
 
-10. That's it! Now you can open your app using:
+As you push these files to the heroku remote you will see how a unix environment gets built  built and made into a dyno (may take a minute or more).
+
+1. That's it! Now you can open your app using:
 
 ```bash
 heroku open
 ```
 
-This last command is just a shortcut for opening your browser to the right url where the app will be.  (By default heroku assigns some random URL name like  `https://calm-everglades-05991.herokuapp.com/`)
+This last command is just a shortcut for opening your browser to the right url where the app will be.  (By default heroku assigns some random URL name like  `https://calm-everglades-05991.herokuapp.com/`).    
 
-##Deploy with Heroku
+See the troubleshooting notes below if anything goes wrong.
+
+## Deploy with Heroku
 
 This is based on Martin Renou's instructions.
 
@@ -78,7 +82,7 @@ heroku open
 
 ---
 
-### Further notes
+### More technical notes
 
 #### Creating user modules that are pip installable from github
 
@@ -96,3 +100,8 @@ Incidentally this also means one can pip install the module like this (here usin
 pip install git+https://github.com/jhconning/renegotiation.git#egg=Contract
 ```
 
+
+
+#### Renaming the heroku remote
+
+`heroku create` sometimes creates an app with a name like `enigmatic-cliffs-37055` but each new time you use `heroku create` it creates a new app dyno with a new name (like `young-crag-79945`). Sometimes when you then tried to push things to heroku with `git push heroku master` it will return an error saying there is no such remote.  If you then type `git remote -v` to see the list of remotes you'll see that the remote is still named after the first app (not sure why).  You can fix this by typing `heroku git:remote -a young-crag-79945` as explained [here](https://devcenter.heroku.com/articles/git#for-an-existing-heroku-app)
